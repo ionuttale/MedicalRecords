@@ -1,0 +1,114 @@
+/* General reset */
+body, h1, h2, p, form {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body styling */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #cfe4f5;
+    margin: 0;
+}
+
+/* Login container */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #e4f0f8;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    width: 60%;
+    max-width: 900px;
+}
+
+/* Logo section */
+.logo-section {
+    flex: 1; /* Adjusts space for the logo section */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    width: 250px; /* Increased logo size */
+    max-width: 100%;
+}
+
+/* Login section */
+.login-section {
+    flex: 1; /* Adjusts space for the login form */
+    background-color: #cfe4f5;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-section h2 {
+    margin-bottom: 25px;
+    text-align: center;
+    color: #2f774e;
+    font-size: 1.8rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between inputs and button */
+}
+
+input[type="text"], input[type="password"] {
+    padding: 15px;
+    font-size: 1.2rem;
+    border: 1px solid #a2c8df;
+    border-radius: 8px;
+    outline: none;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #2f774e;
+    box-shadow: 0 0 8px rgba(47, 119, 78, 0.5);
+}
+
+button {
+    padding: 15px;
+    font-size: 1.2rem;
+    background-color: #2f774e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #1d5034;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column; /* Stack logo and login vertically */
+        align-items: center;
+        padding: 20px;
+        width: 90%;
+    }
+
+    .logo-section, .login-section {
+        flex: none; /* Disable flex scaling for sections */
+        width: 100%; /* Make both sections full-width */
+    }
+
+    .logo {
+        width: 300px; /* Adjust logo size for smaller screens */
+    }
+}

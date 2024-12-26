@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="..\static\css\navigation.css">
+    <link rel="stylesheet" href="..\static\css\dashboard.css">  
+</head>
+<body>
+    <nav class = "navbar">
+        <ul>
+            <li><img src="../static/images/logo.png" alt="Marry's Pharma" class="logo"></li>
+            <li><a href ="{{ url_for('home') }}">Home</a></li>
+            <li><a href ="{{ url_for('home') }}">Patients</a></li>
+            <li><a href ="{{ url_for('home') }}">Products</a></li>
+            <li><a href ="{{ url_for('home') }}">Purchase</a></li>
+            <li><a href ="{{ url_for('home') }}">Contact</a></li>
+            <li><a href ="{{ url_for('home') }}">About</a></li>
+        </ul>
+    </nav>
+    
+    <div class = "dashboard">
+        <div class = "container">
+            <div class = "box">
+                <div class="card">
+                    <div class="icon">
+                        <img src="..\static\images\patient.svg" alt="Icon"> 
+                    </div>
+                    <div>
+                        <div class="title">Total Patients</div>
+                        <div class="count"><span id = "total-patients">Loading...</span></div>
+                    </div>
+                </div>
+                <button class="details-button">Show Details</button>
+            </div>
+            <div class = "box">
+                <div class = "card">
+                    <div class="icon">
+                        <img src="..\static\images\medicine.svg" alt="Icon"> 
+                    </div>
+                    <div>
+                        <div class="title">Total Medicines</div>
+                        <div class="count"><span id = "total-medicines">Loading...</span></div>
+                    </div>
+                </div>
+                <button class="details-button">Show Details</button>
+            </div>
+            <div class = "box">
+                <div class = "card">
+                    <div class="icon">
+                        <img src="..\static\images\profit.svg" alt="Icon"> 
+                    </div>
+                    <div>
+                        <div class="title">Total Profit</div>
+                        <div class="count">
+                            <span id = "total-profit">Loading...</span>
+                            <span class="euro-symbol">€</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="details-button">Show Details</button>
+            </div>
+            <div class = "box">
+                <div class="card">
+                    <div class="icon">
+                        <img src="..\static\images\stock.svg" alt="Icon"> 
+                    </div>
+                    <div>
+                        <div class="title">Out of stock</div>
+                        <div class="count"><span id = "out-of-stock">Loading...</span></div>
+                    </div>
+                </div>
+                <button class="button">Show Details</button>
+            </div>
+        </div>
+    </div>
+    <script src="..\static\js\dashboard.js"></script>
+</body>
+</html>
