@@ -50,7 +50,9 @@ def dashboard_data():
     cursor.execute('SELECT COUNT(*) AS out_of_stock FROM Medicines WHERE quantity = 0')
     out_of_stock = cursor.fetchone()['out_of_stock']
     
-    print(total_patients, total_medicines, total_sales, out_of_stock)  
+    # print(total_patients, total_medicines, total_sales, out_of_stock)  
+
+    cursor.close()
 
     return jsonify({
         "total_patients": total_patients,
@@ -69,13 +71,56 @@ def expiring_medicines():
         ORDER BY expiration_date ASC
     ''')
     medicines = cursor.fetchall()
+    cursor.close()
     return jsonify(medicines)
+
+
+@app.route('/api/get_monthly_income')
+def get_monthly_income():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    # SQL query to calculate monthly income (sum of price * quantity for each medicine sold)
+    cursor.execute("""
+    SELECT 
+        DATE_FORMAT(pm.sale_date, '%Y-%m') AS month,  -- Format the date as 'Year-Month'
+        SUM(m.price * pm.quantity) AS total_income
+    FROM 
+        Patients_medicines pm
+    JOIN 
+        Medicines m ON pm.id_medicine = m.id
+    JOIN 
+        Patients p ON pm.id_patient = p.id
+    WHERE 
+        (pm.sale_date >= DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 11 MONTH), '%Y-%m-01') AND 
+         pm.sale_date < DATE_FORMAT(CURDATE(), '%Y-%m-01'))
+    GROUP BY 
+        month
+    ORDER BY 
+        month DESC;
+    """)
+
+    result = cursor.fetchall()
+    
+    # print(result)
+
+    # Process the result into two lists: months and income
+    months = [row['month'] for row in result]  # Access the 'month' key
+    income = [row['total_income'] for row in result]  # Access the 'total_income' key
+
+    cursor.close()
+
+    # Return the data as JSON
+    return jsonify({
+        'months': months,
+        'income': income
+    })
+
 
 @app.route('/api/recent_sales')
 def recent_sales():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('''
-        SELECT p.name AS patient_name, m.name AS medicine_name, pm.sale_date, pm.quantity
+        SELECT p.name AS patient_name, m.name AS medicine_name, pm.sale_date, pm.quantity, m.price * pm.quantity AS total_price
         FROM Patients_medicines pm
         JOIN Patients p ON pm.id_patient = p.id
         JOIN Medicines m ON pm.id_medicine = m.id
@@ -83,8 +128,36 @@ def recent_sales():
         LIMIT 10
     ''')
     sales = cursor.fetchall()
+    cursor.close()
     return jsonify(sales)
 
+@app.route('/patients')
+def patients():
+    return render_template('patients.html')
+
+@app.route('/api/get-patients')
+def get_patients():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM Patients')
+    patients = cursor.fetchall()
+    cursor.close()
+    return jsonify(patients)
+
+@app.route('/products')
+def products():
+    return render_template('products.html')
+
+@app.route('/purchase')
+def purchase():
+    return render_template('purchase.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -11,16 +11,11 @@ body {
     margin: 0 auto;
     margin-top: 10px;
     height: 100%;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: flex;
     flex-direction: row;
     text-align: center;
-    justify-content: space-between
-}
-
-h1 {
-    text-align: center;
-    color: #333;
+    justify-content: space-around;
 }
 
 .box{
@@ -46,7 +41,7 @@ h1 {
 
 .icon {
     width: 100px;
-    height: 60px;
+    height: 100px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -56,21 +51,21 @@ h1 {
     margin-right: 20px;
   }
 
-  .icon img {
-    width: 80px;
+.icon img {
+    width: 100px;
   }
 
-  .title {
+.title {
     font-size: 20px;
   }
 
-  .count {
+.count {
     font-size: 30px;
     font-style: bold;
     color: #2f774e;
   }
 
-  button {
+button {
     background-color: transparent;
     border: none;
     padding: 0;
@@ -78,10 +73,10 @@ h1 {
     color: #2f774e;
     text-decoration: underline;
     font-weight: normal;
-    float: left
+    float: center;
   }
   
-  button:hover {
+button:hover {
     text-decoration: none;
     color: #4CAF50;
   }
@@ -89,3 +84,75 @@ h1 {
   .euro-symbol {
     margin-left: 1px; /* Adjust margin as needed */
   }
+  
+.table-container {
+    margin: 40px auto;
+    max-width: 1200px;
+    max-height: 400px;
+    padding: 20px;
+    background-color: rgb(37, 37, 37); 
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgb(37, 37, 37);
+    overflow: hidden;
+}
+
+h1 {
+  text-align: left;
+  margin-bottom: 15px;
+  color: #2f774e;
+}
+
+h2{
+  text-align: center;
+  margin-bottom: 15px;
+  color: #2f774e;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+thead th {
+  background-color: rgb(15, 15, 15);
+  color: #2f774e;
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+
+tbody td {
+  font-size: 18px;
+  padding: 10px;
+  border-bottom: 1px;
+  text-align: center;
+}
+
+tbody tr:hover {
+  background-color: rgb(15, 15, 15);
+}
+
+.icon-button {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  position: center;
+}
+
+.icon-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.chart-income{
+  display: flex;               /* Enable Flexbox */
+  flex-direction: column;      /* Stack header and canvas vertically */
+  justify-content: center;     /* Vertically center content */
+  align-items: center;         /* Horizontally center content */
+  width: 100%;                 /* Set the container's width */
+  height: auto;               /* Set the container's height */
+  margin-top: 20px;            /* Optional: space above the container */
+  text-align: center;   
+}

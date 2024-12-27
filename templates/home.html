@@ -10,11 +10,11 @@
         <ul>
             <li><img src="../static/images/logo.png" alt="Marry's Pharma" class="logo"></li>
             <li><a href ="{{ url_for('home') }}">Home</a></li>
-            <li><a href ="{{ url_for('home') }}">Patients</a></li>
-            <li><a href ="{{ url_for('home') }}">Products</a></li>
-            <li><a href ="{{ url_for('home') }}">Purchase</a></li>
-            <li><a href ="{{ url_for('home') }}">Contact</a></li>
-            <li><a href ="{{ url_for('home') }}">About</a></li>
+            <li><a href ="{{ url_for('patients') }}">Patients</a></li>
+            <li><a href ="{{ url_for('products') }}">Products</a></li>
+            <li><a href ="{{ url_for('purchase') }}">Purchase</a></li>
+            <li><a href ="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href ="{{ url_for('about') }}">About</a></li>
         </ul>
     </nav>
     
@@ -72,7 +72,156 @@
                 <button class="button">Show Details</button>
             </div>
         </div>
+
+        <div class = "container">
+                <div class="table-container">
+                    <h1>Expiring List</h1>
+                    <table id="table1" data-sort-order = "asc">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Medicine Name
+                                    <button class="icon-button" onclick = "sortTable('table1', 0)">
+                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                            
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                            
+                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                            
+                                            </svg>
+                                    </button>
+                                </th>
+                                <th>
+                                    Expire Date
+                                    <button class="icon-button" onclick = "sortTable('table1', 1)">
+                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                            
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                            
+                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                            
+                                            </svg>
+                                    </button>
+                                </th>
+                                <th>
+                                    Quantity
+                                    <button class="icon-button" onclick = "sortTable('table1', 2)">
+                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                            
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                            
+                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                            
+                                            </svg>
+                                    </button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="medicine-list">
+                            <!-- Data will be dynamically populated using JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-container">
+                    <h1>Recent Orders</h1>
+                    <table id = "table2" data-sort-order = "asc">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Medicine Name
+                                    <button class="icon-button" onclick = "sortTable('table2', 0)">
+                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                            
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                            
+                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                            
+                                            </svg>
+                                    </button>
+                                </th>
+                                <th>
+                                    Patient Name
+                                    <button class="icon-button" onclick = "sortTable('table2', 1)">
+                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                            
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                            
+                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                            
+                                            </svg>
+                                    </button>
+                                </th>
+                                <th>
+                                    Quantity
+                                    <button class="icon-button" onclick = "sortTable('table2', 2)">
+                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                            
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                            
+                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                            
+                                            </svg>
+                                    </button>
+                                </th>
+                                <th>
+                                    Date
+                                    <button class="icon-button" onclick = "sortTable('table2', 3)">
+                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                            
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                            
+                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                            
+                                            </svg>
+                                    </button>
+                                </th>
+                                <th>
+                                    Total
+                                    <button class="icon-button" onclick = "sortTable('table2', 4)">
+                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                            
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                            
+                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                            
+                                            </svg>
+                                    </button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-sales">
+                            <!-- Data will be dynamically populated using JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        <div class = "container">
+            <div class = "chart-income">
+                <h2>Monthly Income</h2>
+                <canvas id="incomeChart" width="400" height="200"></canvas>   
+            </div>
+        </div>
     </div>
     <script src="..\static\js\dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
