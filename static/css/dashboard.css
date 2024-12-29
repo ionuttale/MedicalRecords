@@ -6,10 +6,15 @@ body {
     color: #2f774e;
 }
 
+body::-webkit-scrollbar {
+  display: none; /* This hides the scrollbar in Webkit browsers (e.g., Chrome, Safari) */
+}
+
 .container{
     width: 92%;
     margin: 0 auto;
     margin-top: 10px;
+    margin-bottom: 10px;
     height: 100%;
     /* border: 2px solid red; */
     display: flex;
@@ -154,5 +159,6 @@ tbody tr:hover {
   width: 100%;                 /* Set the container's width */
   height: auto;               /* Set the container's height */
   margin-top: 20px;            /* Optional: space above the container */
-  text-align: center;   
+  text-align: center;
+  margin-bottom: 10px;   
 }

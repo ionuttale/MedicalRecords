@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Patients</title>
+    <link rel="stylesheet" href="..\static\css\navigation.css">
+    <link rel="stylesheet" href="..\static\css\add_patient.css">  
+</head>
+<body class = "patients">
+    <nav class = "navbar">
+        <ul>
+            <li><img src="../static/images/logo.png" alt="Marry's Pharma" class="logo"></li>
+            <li><a href ="{{ url_for('home') }}">Home</a></li>
+            <li><a href ="{{ url_for('patients') }}">Patients</a></li>
+            <li><a href ="{{ url_for('go_add_patient')}}">Add Patient</a></li>
+            <li><a href ="{{ url_for('products') }}">Products</a></li>
+            <li><a href ="{{ url_for('purchases') }}">Purchases</a></li>
+            <li><a href ="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href ="{{ url_for('about') }}">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Add New Product</h2>
+        <form id="addMedicineForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        
+            <label for="producer">Producer:</label>
+            <input type="text" id="producer" name="producer" required>
+        
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" required>
+        
+            <label for="expiration_date">Expiration Date:</label>
+            <input type="date" id="expiration_date" name="expiration_date" required>
+        
+            <label for="quantity">Quantity:</label>
+            <input type="text" id="quantity" name="quantity" required>
+        
+            <label for="category">Category:</label>
+            <input type ="text" id="category" name="category" required>
+            </select>
+        
+            <label for="medical_prescription">Medical Prescription Required:</label>
+            <select id="medical_prescription" name="medical_prescription" required>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        
+            <div class="modal-footer">
+                <button type="submit">Save Medicine</button>
+            </div>
+        </form>
+        
+    </div>
+    </div>
+        <script src="..\static\js\add_product.js"></script>
+</body>
+</html>

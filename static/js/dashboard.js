@@ -57,12 +57,12 @@ fetch('/api/recent_sales')
     });
     
     document.addEventListener('DOMContentLoaded', function () {
-        // Fetch the recent sales data from the Flask backend
+        // Fetch the monthly income data
         fetch('/api/get_monthly_income')
             .then(response => response.json())  // Parse the JSON response
             .then(data => {
                 console.log('Data received from backend:', data);
-        
+    
                 // Get the current month and year
                 const currentDate = new Date();
                 const currentMonth = currentDate.getMonth();  // 0-based (0 = January, 11 = December)
@@ -83,26 +83,32 @@ fetch('/api/recent_sales')
                     return acc;
                 }, {});
     
-                // Accumulate the income for each month using the data returned from the API
-                data.months.forEach((month, index) => {
-                    if (monthNames.includes(month)) {
-                        monthlyIncome[month] = data.income[index];  // Set the income for the corresponding month
-                    }
-                });
-        
+                // Ensure the data returned by the API is in the expected format
+                // (Assuming the API returns months and income in arrays)
+                if (data.months && data.income) {
+                    // Accumulate the income for each month using the data returned from the API
+                    data.months.forEach((month, index) => {
+                        if (monthNames.includes(month)) {
+                            monthlyIncome[month] = data.income[index];  // Set the income for the corresponding month
+                        }
+                    });
+                } else {
+                    console.error('API response missing "months" or "income" data.');
+                }
+    
                 // Now, extract the months and corresponding income values
                 const months = monthNames;
                 const income = months.map(month => monthlyIncome[month]);
-        
+    
                 console.log('Months:', months);
                 console.log('Income:', income);
-        
+    
                 // Create the chart
                 const ctx = document.getElementById('incomeChart').getContext('2d');
                 const incomeChart = new Chart(ctx, {
                     type: 'bar',  // Bar chart type
                     data: {
-                        labels: months,  // X-axis labels (months from August 2024 to the current month)
+                        labels: months,  // X-axis labels (months)
                         datasets: [{
                             label: 'Monthly Income (€)',  // Label for the dataset
                             data: income,  // Y-axis data (income for the last 12 months)
@@ -129,7 +135,6 @@ fetch('/api/recent_sales')
             });
     });
     
-    
 function sortTable(tableId, columnIndex) {
     const table = document.getElementById(tableId); // Select the specific table by ID
     const tbody = table.querySelector('tbody'); // Select the table body
@@ -138,12 +143,20 @@ function sortTable(tableId, columnIndex) {
     // Determine sort direction based on the table's data-sortOrder attribute
     const isAscending = table.dataset.sortOrder !== 'asc';
     table.dataset.sortOrder = isAscending ? 'asc' : 'desc';
-    
+
     // Sort rows based on the selected column's text content
     rows.sort((a, b) => {
         const cellA = a.cells[columnIndex].textContent.trim();
         const cellB = b.cells[columnIndex].textContent.trim();
+        
+        if (columnIndex == 4) {
+            // Remove non-numeric characters (like the Euro symbol) and convert to float
+            const priceA = parseFloat(cellA.replace('€', '').trim());
+            const priceB = parseFloat(cellB.replace('€', '').trim());
     
+            return isAscending ? priceA - priceB : priceB - priceA;
+        }
+
         // Sort numerically if both cells are numbers
         if (!isNaN(cellA) && !isNaN(cellB)) {
             return isAscending ? cellA - cellB : cellB - cellA;

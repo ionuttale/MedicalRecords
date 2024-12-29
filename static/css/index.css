@@ -40,7 +40,7 @@ h2{
  
 .button1{
 	position: realtive;
-  	align: center;
+	text-align: center;
 	border: none;
 	outline: none;
 	height: 40px;
@@ -97,7 +97,7 @@ h2{
  
 .button1{
 	position: realtive;
-  	align: center;
+  	text-align: center;
 	border: none;
 	outline: none;
 	height: 40px;

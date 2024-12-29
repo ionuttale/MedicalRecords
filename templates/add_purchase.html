@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Purchase</title>
+    <link rel="stylesheet" href="..\static\css\navigation.css">
+    <link rel="stylesheet" href="..\static\css\add_patient.css">  
+</head>
+<body class="patients">
+    <nav class="navbar">
+        <ul>
+            <li><img src="../static/images/logo.png" alt="Marry's Pharma" class="logo"></li>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('patients') }}">Patients</a></li>
+            <li><a href="{{ url_for('products') }}">Products</a></li>
+            <li><a href="{{ url_for('purchases') }}">Purchases</a></li>
+            <li><a href="{{ url_for('add_purchase') }}">Add Purchase</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Add New Purchase</h2>
+        <form id="addPurchaseForm">
+            <!-- Patient name, surname, and CNP -->
+            <label for="patient_name">Patient Name:</label>
+            <input type="text" id="patient_name" name="patient_name" required>
+        
+            <label for="patient_surname">Patient Surname:</label>
+            <input type="text" id="patient_surname" name="patient_surname" required>
+        
+            <label for="cnp">Patient CNP:</label>
+            <input type="text" id="cnp" name="cnp" required>
+        
+            <!-- Use medicine name and producer instead of medicine_id -->
+            <label for="medicine_name">Medicine Name:</label>
+            <input type="text" id="medicine_name" name="medicine_name" required>
+        
+            <label for="producer_name">Producer Name:</label>
+            <input type="text" id="producer_name" name="producer_name" required>
+        
+            <label for="quantity">Quantity:</label>
+            <input type="text" id="quantity" name="quantity" required>
+        
+            <div class="modal-footer">
+                <button type="submit">Save Purchase</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="..\static\js\add_purchase.js"></script>
+</body>
+</html>

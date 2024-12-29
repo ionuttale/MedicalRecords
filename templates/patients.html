@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Dashboard</title>
+    <title>Patients</title>
     <link rel="stylesheet" href="..\static\css\navigation.css">
     <link rel="stylesheet" href="..\static\css\patients.css">  
 </head>
-<body>
+<body class = "patients">
     <nav class = "navbar">
         <ul>
             <li><img src="../static/images/logo.png" alt="Marry's Pharma" class="logo"></li>
             <li><a href ="{{ url_for('home') }}">Home</a></li>
             <li><a href ="{{ url_for('patients') }}">Patients</a></li>
+            <li><a href ="{{ url_for('go_add_patient')}}">Add Patient</a></li>
             <li><a href ="{{ url_for('products') }}">Products</a></li>
-            <li><a href ="{{ url_for('purchase') }}">Purchase</a></li>
+            <li><a href ="{{ url_for('purchases') }}">Purchases</a></li>
             <li><a href ="{{ url_for('contact') }}">Contact</a></li>
             <li><a href ="{{ url_for('about') }}">About</a></li>
         </ul>
@@ -20,7 +21,7 @@
 
     <div class = "container">
         <h1>Patients List</h1>
-        <input type="text" id="search-input" placeholder="Search by name or surname...">
+        <input type="text" id="search-input" placeholder="Search by name, cnp or phone number...">
         <div class="patients-list">
             <table id="table1" data-sort-order = "asc">
                 <thead>
@@ -69,7 +70,7 @@
                         </th>
                         <th>
                             Gender
-                            <button class="icon-button" onclick = "sortTable('table1', 2)">
+                            <button class="icon-button" onclick = "sortTable('table1', 3)">
                                 <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"/>
@@ -83,73 +84,18 @@
                         </th>
                         <th>
                             CNP
-                            <button class="icon-button" onclick = "sortTable('table1', 2)">
-                                <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                    
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                    
-                                    <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-                                    
-                                    </svg>
-                            </button>
                         </th>
                         <th>
                             Address
-                            <button class="icon-button" onclick = "sortTable('table1', 2)">
-                                <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                    
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                    
-                                    <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-                                    
-                                    </svg>
-                            </button>
                         </th>
                         <th>
                             Phone Number
-                            <button class="icon-button" onclick = "sortTable('table1', 2)">
-                                <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                    
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                    
-                                    <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-                                    
-                                    </svg>
-                            </button>
                         </th>
                         <th>
                             Email
-                            <button class="icon-button" onclick = "sortTable('table1', 2)">
-                                <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                    
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                    
-                                    <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-                                    
-                                    </svg>
-                            </button>
                         </th>
                         <th>
                             Diagnosis
-                            <button class="icon-button" onclick = "sortTable('table1', 2)">
-                                <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                    
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                    
-                                    <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-                                    
-                                    </svg>
-                            </button>
                         </th>
                         <th>
                             Operations
@@ -161,6 +107,37 @@
                 </tbody>
             </table>
         </div>
+        <!-- The Modal -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Edit Patient Information</h2>
+                <form id="updateForm">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" required>
+        
+                    <label for="surname">Surname:</label>
+                    <input type="text" id="surname" required>
+        
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="text" id="phone_number" required>
+        
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" required>
+        
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+        
+                    <label for="diagnosis">Diagnosis:</label>
+                    <input type="text" id="diagnosis">
+        
+                    <div class="modal-footer">
+                        <button type="submit">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
         <script src="..\static\js\patients.js"></script>
 </body>
 </html>

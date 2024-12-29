@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Patients</title>
+    <link rel="stylesheet" href="..\static\css\navigation.css">
+    <link rel="stylesheet" href="..\static\css\add_patient.css">  
+</head>
+<body class = "patients">
+    <nav class = "navbar">
+        <ul>
+            <li><img src="../static/images/logo.png" alt="Marry's Pharma" class="logo"></li>
+            <li><a href ="{{ url_for('home') }}">Home</a></li>
+            <li><a href ="{{ url_for('patients') }}">Patients</a></li>
+            <li><a href ="{{ url_for('go_add_patient')}}">Add Patient</a></li>
+            <li><a href ="{{ url_for('products') }}">Products</a></li>
+            <li><a href ="{{ url_for('purchases') }}">Purchases</a></li>
+            <li><a href ="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href ="{{ url_for('about') }}">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Add New Patient</h2>
+        <form id="addPatientForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" required>
+
+            <label for="cnp">CNP:</label>
+            <input type="text" id="cnp" name="cnp" required>
+
+            <label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" name="birthday" required>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="phone_number">Phone Number:</label>
+            <input type="text" id="phone_number" name="phone_number" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="diagnosis">Diagnosis:</label>
+            <input type="text" id="diagnosis" name="diagnosis">
+
+            <div class="modal-footer">
+                <button type="submit">Save Patient</button>
+            </div>
+        </form>
+    </div>
+    </div>
+        <script src="..\static\js\add_patient.js"></script>
+</body>
+</html>
