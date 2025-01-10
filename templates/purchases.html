@@ -6,106 +6,71 @@
     <link rel="stylesheet" href="..\static\css\patients.css">  
 </head>
 <body>
-    <nav class = "navbar">
+    <nav class="navbar">
         <ul>
             <li><img src="../static/images/logo.png" alt="Marry's Pharma" class="logo"></li>
-            <li><a href ="{{ url_for('home') }}">Home</a></li>
-            <li><a href ="{{ url_for('patients') }}">Patients</a></li>
-            <li><a href ="{{ url_for('products') }}">Products</a></li>
-            <li><a href ="{{ url_for('purchases') }}">Purchases</a></li>
-            <li><a href ="{{ url_for('go_add_purchase') }}">New Purchase</a></li>
-            <li><a href ="{{ url_for('contact') }}">Contact</a></li>
-            <li><a href ="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('patients') }}">Patients</a></li>
+            <li><a href="{{ url_for('products') }}">Products</a></li>
+            <li><a href="{{ url_for('purchases') }}">Purchases</a></li>
+            <li><a href="{{ url_for('go_add_purchase') }}">New Purchase</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
         </ul>
     </nav>
 
-    <div class = "container">
+    <div class="container">
         <h1>Recent Orders</h1>
         <input type="text" id="search-input" placeholder="Search by name...">
-                    <table id = "table1" data-sort-order = "asc">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Patient Name
-                                    <button class="icon-button" onclick = "sortTable('table', 2)">
-                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                            
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                            
-                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-                                            
-                                            </svg>
-                                    </button>
-                                </th>
-                                <th>
-                                    Medicine Name
-                                    <button class="icon-button" onclick = "sortTable('table', 0)">
-                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                            
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                            
-                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-                                            
-                                            </svg>
-                                    </button>
-                                </th>
-                                <th>
-                                    Producer Name
-                                    <button class="icon-button" onclick = "sortTable('table', 1)">
-                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                            
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                            
-                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-                                            
-                                            </svg>
-                                    </button>
-                                </th>
-                                <th>
-                                    Quantity
-                                    <button class="icon-button" onclick = "sortTable('table', 3)">
-                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                            
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                            
-                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-                                            
-                                            </svg>
-                                    </button>
-                                </th>
-                                <th>
-                                    Date
-                                </th>
-                                <th>
-                                    Total
-                                    <button class="icon-button" onclick = "sortTable('table', 5)">
-                                        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                            
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                            
-                                            <g id="SVGRepo_iconCarrier"> <path d="M16 18L16 16M16 6L20 10.125M16 6L12 10.125M16 6L16 13" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 18L12 13.875M8 18L4 13.875M8 18L8 11M8 6V8" stroke="#211715" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-                                            
-                                            </svg>
-                                    </button>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="recent-sales">
-                            <!-- Data will be dynamically populated using JavaScript -->
-                        </tbody>
-                    </table>
-        </div>
+        <table id="table1" data-sort-order="asc">
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Medicine Name</th>
+                    <th>Producer Name</th>
+                    <th>Quantity</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Actions</th> <!-- Add this new header for action buttons -->
+                </tr>
+            </thead>
+            <tbody id="recent-sales">
+                <!-- Data will be dynamically populated using JavaScript -->
+            </tbody>
+        </table>
     </div>
+
+   <!-- Edit Modal -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="updateForm">
+            <label for="patientName">Patient Name:</label>
+            <input type="text" id="patientName" name="patientName">
+
+            <!-- Added CNP field -->
+            <label for="cnp">CNP:</label>
+            <input type="text" id="cnp" name="cnp">
+
+            <label for="medicineName">Medicine Name:</label>
+            <input type="text" id="medicineName" name="medicineName">
+
+            <label for="producer">Producer:</label>
+            <input type="text" id="producer" name="producer">
+
+            <label for="quantity">Quantity:</label>
+            <input type="text" id="quantity" name="quantity">
+
+            <label for="purchaseDate">Purchase Date:</label>
+            <input type="date" id="purchaseDate" name="purchaseDate">
+
+            <div class="modal-footer">
+                <button type="submit">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
     <script src="..\static\js\purchases.js"></script>
 </body>
 </html>

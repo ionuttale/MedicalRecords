@@ -174,3 +174,42 @@ form input {
 .modal-footer button:hover {
   background-color: #4CAF50; /* Light green on hover */
 }
+
+/* Styling for the select element inside the modal */
+select {
+  width: 100%; /* Ensure select fills the width */
+  padding: 8px;
+  margin: auto;
+  margin-bottom: 15px;
+  border: 1px solid #000000c9; /* Dark border for select */
+  border-radius: 4px;
+  background-color: #222; /* Slightly darker background for select */
+  color: #2f774e; /* Green text */
+  font-size: 1.2rem; /* Adjust font size for consistency */
+}
+
+/* Add a hover and focus effect on the select */
+select:hover, select:focus {
+  border-color: #2f774e; /* Green border on hover/focus */
+  box-shadow: 0 0 8px rgba(47, 119, 78, 0.5); /* Green shadow */
+}
+
+/* Apply consistent styling to the date and select fields without affecting the rest of the inputs */
+form input[type="date"], form select {
+  width: 90%; /* Ensure the date and select elements take up the full width of the container */
+  padding: 12px; /* Same padding for date and select fields */
+  margin: auto; /* Center the elements */
+  margin-bottom: 15px; /* Space between elements */
+  border: 1px solid #000000c9; /* Dark border for date and select elements */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #222; /* Dark background for date and select elements */
+  color: #2f774e; /* Green text */
+  font-size: 1.2rem; /* Set font size for date and select elements */
+}
+
+/* Add hover and focus effects for date and select fields */
+form input[type="date"]:hover, form select:hover,
+form input[type="date"]:focus, form select:focus {
+  border-color: #2f774e; /* Green border on hover/focus */
+  box-shadow: 0 0 8px rgba(47, 119, 78, 0.5); /* Green shadow */
+}

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, Response
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
+import logging
 
 app = Flask(__name__)
 
@@ -235,6 +236,49 @@ def delete_product(id):
     cursor.close()
     return jsonify({'message': 'Product deleted successfully'})
 
+@app.route('/api/update-product/<int:product_id>', methods=['PUT'])
+def update_product(product_id):
+    try:
+        # Parse the JSON request body
+        data = request.get_json()
+        name = data.get('name')
+        producer = data.get('producer')
+        price = data.get('price')
+        expiration_date = data.get('expiration_date')
+        quantity = data.get('quantity')
+        category = data.get('category')
+        medical_prescription = data.get('medical_prescription')
+
+        # Validate required fields
+        if not all([name, producer, price, expiration_date, quantity, category, medical_prescription]):
+            return jsonify({'error': 'All fields are required.'}), 400
+
+        # Connect to the MySQL database and update the product
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        update_query = """
+        UPDATE medicines
+        SET 
+            name = %s,
+            producer = %s,
+            price = %s,
+            expiration_date = %s,
+            quantity = %s,
+            category = %s,
+            medical_prescription = %s
+        WHERE id = %s
+        """
+        cursor.execute(update_query, (name, producer, price, expiration_date, quantity, category, medical_prescription, product_id))
+        mysql.connection.commit()
+
+        return jsonify({'message': 'Product updated successfully.'}), 200
+
+    except MySQLdb.Error as e:
+        print(f"MySQL Error: {e}")
+        return jsonify({'error': 'Failed to update the product.'}), 500
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': 'An error occurred while updating the product.'}), 500
+
 @app.route('/go_add_product')
 def go_add_product():
     return render_template('add_product.html')
@@ -283,8 +327,17 @@ def purchases():
 @app.route('/api/get-purchases')
 def get_purchases():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('''
-        SELECT pm.id, p.name AS patient_name, m.name AS medicine_name, m.producer AS producer_name, pm.sale_date, pm.quantity, m.price * pm.quantity AS total_price
+    cursor.execute(''' 
+        SELECT 
+            pm.id, 
+            p.name AS patient_name, 
+            p.surname AS patient_surname, 
+            p.cnp,  -- Add the cnp column here
+            m.name AS medicine_name, 
+            m.producer AS producer_name, 
+            pm.sale_date, 
+            pm.quantity, 
+            m.price * pm.quantity AS total_price
         FROM Patients_medicines pm
         JOIN Patients p ON pm.id_patient = p.id
         JOIN Medicines m ON pm.id_medicine = m.id
@@ -293,6 +346,87 @@ def get_purchases():
     purchases = cursor.fetchall()
     cursor.close()
     return jsonify(purchases)
+
+@app.route('/api/delete-purchase/<int:id>', methods=['DELETE'])
+def delete_purchase(id):
+    cursor = mysql.connection.cursor()
+
+    try:
+        # Delete the row from the Patients_medicines table using the provided ID
+        cursor.execute("DELETE FROM Patients_medicines WHERE id = %s", (id,))
+        mysql.connection.commit()  # Commit changes to the database
+
+        # Check if the row was actually deleted
+        if cursor.rowcount > 0:
+            return jsonify({'message': 'Purchase deleted successfully!'}), 200
+        else:
+            return jsonify({'message': 'Purchase not found or no rows affected.'}), 404
+    except Exception as e:
+        # Handle any error during the deletion process
+        mysql.connection.rollback()  # Rollback in case of an error
+        return jsonify({'message': f'Error occurred: {str(e)}'}), 500
+    finally:
+        cursor.close()  # Ensure cursor is closed after use
+
+@app.route('/api/update-purchase/<int:id>', methods=['PUT'])
+def update_purchase(id):
+    cursor = None  # Initialize cursor variable before the try block
+
+    try:
+        # Get JSON data from the request
+        data = request.get_json()
+
+        # Extract data from the request
+        patient_name = data.get('patient_name')
+        patient_surname = data.get('patient_surname')
+        cnp = data.get('cnp')
+        medicine_name = data.get('medicine_name')
+        producer_name = data.get('producer_name')
+        quantity = data.get('quantity')
+
+        # Initialize the cursor
+        cursor = mysql.connection.cursor()
+
+        # Find the patient by name, surname, and CNP
+        cursor.execute("SELECT id FROM Patients WHERE cnp = %s", (cnp,))
+        patient = cursor.fetchone()
+
+        # Find the medicine by name and producer
+        cursor.execute("SELECT id FROM Medicines WHERE name = %s AND producer = %s", (medicine_name, producer_name))
+        medicine = cursor.fetchone()
+
+        # If patient or medicine is not found, return error
+        if not patient:
+            return jsonify({'success': False, 'message': 'Patient not found'}), 400
+
+        if not medicine:
+            return jsonify({'success': False, 'message': 'Medicine not found'}), 400
+
+        # Update the Patients_medicines table with new data
+        cursor.execute("""
+            UPDATE Patients_medicines
+            SET id_patient = %s, id_medicine = %s, quantity = %s
+            WHERE id = %s
+        """, (patient[0], medicine[0], quantity, id))
+
+        # Commit the transaction
+        mysql.connection.commit()
+
+        return jsonify({'success': True, 'message': 'Purchase updated successfully!'})
+
+    except MySQLdb.Error as e:
+        print("Error updating data:", e)
+        mysql.connection.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+    finally:
+        if cursor:
+            cursor.close()
+
 
 @app.route('/go_add_purchase')
 def go_add_purchase():
